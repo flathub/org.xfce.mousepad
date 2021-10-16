@@ -57,6 +57,7 @@ modules:
             x-checker-data:
               type: anitya
               project-id: 6601
+              stable-only: true
               url-template: https://github.com/AbiWord/enchant/releases/download/v$version/enchant-$version.tar.gz
     cleanup:
       - /bin
@@ -80,4 +81,5 @@ modules:
         x-checker-data:
           type: anitya
           project-id: 198617
+          stable-only: true
           url-template: https://archive.xfce.org/src/apps/mousepad/$major.$minor/mousepad-$version.tar.bz2
