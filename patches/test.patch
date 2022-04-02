@@ -1,0 +1,49 @@
+From ea8211f9416b13b8845a31b4c7c538ffd16b8bb1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ga=C3=ABl=20Bonithon?= <gael@xfce.org>
+Date: Sat, 2 Apr 2022 17:40:47 +0200
+Subject: [PATCH] test
+
+---
+ libxfce4kbd-private/Makefile.am                 | 5 ++---
+ libxfce4kbd-private/libxfce4kbd-private-3.pc.in | 2 +-
+ 2 files changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/libxfce4kbd-private/Makefile.am b/libxfce4kbd-private/Makefile.am
+index 2e6ebe8..b827b62 100644
+--- a/libxfce4kbd-private/Makefile.am
++++ b/libxfce4kbd-private/Makefile.am
+@@ -17,6 +17,8 @@ libxfce4kbd_sources =
+ if HAVE_XFCONF
+   libxfce4kbd_headers += xfce-shortcuts-provider.h
+   libxfce4kbd_sources += xfce-shortcuts-provider.c
++  settingsdir = $(sysconfdir)/xdg/xfce4/xfconf/xfce-perchannel-xml
++  settings_DATA = xfce4-keyboard-shortcuts.xml
+ endif
+ 
+ libxfce4kbd_headers += \
+@@ -78,9 +80,6 @@ libxfce4kbd_private_3_la_LIBADD = \
+ 	$(LIBXFCE4UTIL_LIBS) \
+ 	$(XFCONF_LIBS)
+ 
+-settingsdir = $(sysconfdir)/xdg/xfce4/xfconf/xfce-perchannel-xml
+-settings_DATA = xfce4-keyboard-shortcuts.xml
+-
+ pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = libxfce4kbd-private-3.pc
+ 
+diff --git a/libxfce4kbd-private/libxfce4kbd-private-3.pc.in b/libxfce4kbd-private/libxfce4kbd-private-3.pc.in
+index 9daadc5..d613f1c 100644
+--- a/libxfce4kbd-private/libxfce4kbd-private-3.pc.in
++++ b/libxfce4kbd-private/libxfce4kbd-private-3.pc.in
+@@ -5,7 +5,7 @@ includedir=@includedir@
+ 
+ Name: libxfce4kbd-private
+ Description: Private Xfce library for shared code between xfwm4 and xfce4-settings
+-Requires: gdk-3.0 gtk+-3.0 libxfce4util-1.0 libxfconf-0 libxfce4ui-2
++Requires: gdk-3.0 gtk+-3.0 libxfce4util-1.0 libxfce4ui-2
+ Version: @PACKAGE_VERSION@
+ Libs: @LIBX11_LDFLAGS@ -L${libdir} -lxfce4kbd-private-3
+ Cflags: @LIBX11_CFLAGS@ -I${includedir}/xfce4/libxfce4kbd-private-3
+-- 
+2.35.1
+

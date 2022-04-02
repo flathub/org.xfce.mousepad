@@ -123,6 +123,8 @@ modules:
         path: patches/Bump-minimal-required-libxfce4util-to-4.17.2.patch
       - type: patch
         path: patches/libxfce4kbd-Make-Xfconf-dependency-optional.patch
+      - type: patch
+        path: patches/test.patch
 
   - name: mousepad
     config-opts:
