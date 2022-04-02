@@ -1,0 +1,105 @@
+From d6c6f1b3dab126254c27b5a5ae904b4b56e71051 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ga=C3=ABl=20Bonithon?= <gael@xfce.org>
+Date: Sat, 2 Apr 2022 16:10:49 +0200
+Subject: [PATCH 2/2] libxfce4kbd: Make Xfconf dependency optional
+
+Only XfceShortcutsProvider depends on Xfconf. The other features of
+libxfce4kbd can be built without it, which can make things easier in
+various contexts, especially in a flatpak.
+---
+ configure.ac.in                      |  7 ++++++-
+ libxfce4kbd-private/Makefile.am      | 14 ++++++++++----
+ libxfce4kbd-private/xfce-shortcuts.c |  1 -
+ libxfce4kbd-private/xfce-shortcuts.h |  1 -
+ 4 files changed, 16 insertions(+), 7 deletions(-)
+
+diff --git a/configure.ac.in b/configure.ac.in
+index 3fef46a..ea27115 100644
+--- a/configure.ac.in
++++ b/configure.ac.in
+@@ -199,9 +199,10 @@ AC_ARG_ENABLE([keyboard-library],
+                               [Do not compile the keyboard library needed by xfwm4 and xfce4-settings (default=enabled)])],
+               [enable_keyboard_library=$enableval], [enable_keyboard_library=yes])
+ if test "x$enable_keyboard_library" = "xyes"; then
+-  XDT_CHECK_PACKAGE([XFCONF], [libxfconf-0], [4.12.0])
++  XDT_CHECK_PACKAGE([XFCONF], [libxfconf-0], [4.12.0], [have_xfconf=yes], [have_xfconf=no])
+ fi
+ AM_CONDITIONAL([ENABLE_KEYBOARD_LIBRARY], [test "x$enable_keyboard_library" = "xyes"])
++AM_CONDITIONAL([HAVE_XFCONF], [test "x$have_xfconf" = "xyes"])
+ 
+ dnl *********************************************
+ dnl *** Check for vendor specific information ***
+@@ -393,8 +394,12 @@ else
+ echo "* Glade 3.0 UI Designer:     no"
+ fi
+ if test x"$enable_keyboard_library" = x"yes"; then
++if test "x$have_xfconf" = "xyes"; then
+ echo "* Keyboard library support:  yes"
+ else
++echo "* Keyboard library support:  partial (Xfconf missing)"
++fi
++else
+ echo "* Keyboard library support:  no"
+ fi
+ if test x"$LIBSTARTUP_NOTIFICATION_FOUND" = x"yes"; then
+diff --git a/libxfce4kbd-private/Makefile.am b/libxfce4kbd-private/Makefile.am
+index d522292..2e6ebe8 100644
+--- a/libxfce4kbd-private/Makefile.am
++++ b/libxfce4kbd-private/Makefile.am
+@@ -11,8 +11,15 @@ AM_CPPFLAGS = \
+ 	-DPREFIX=\"$(prefix)\" \
+ 	$(PLATFORM_CPPFLAGS)
+ 
+-libxfce4kbd_headers = \
+-	xfce-shortcuts-provider.h \
++libxfce4kbd_headers =
++libxfce4kbd_sources =
++
++if HAVE_XFCONF
++  libxfce4kbd_headers += xfce-shortcuts-provider.h
++  libxfce4kbd_sources += xfce-shortcuts-provider.c
++endif
++
++libxfce4kbd_headers += \
+ 	xfce-shortcuts-grabber.h \
+ 	xfce-shortcut-dialog.h \
+ 	xfce-shortcuts-editor.h \
+@@ -24,10 +31,9 @@ libxfce4kbd_built_sources = \
+ 	xfce-shortcuts-marshal.c \
+ 	xfce-shortcuts-marshal.h
+ 
+-libxfce4kbd_sources = \
++libxfce4kbd_sources += \
+ 	$(libxfce4kbd_headers) \
+ 	$(libxfce4kbd_built_sources) \
+-	xfce-shortcuts-provider.c \
+ 	xfce-shortcuts-grabber.c \
+ 	xfce-shortcut-dialog.c \
+ 	xfce-shortcuts-editor.c \
+diff --git a/libxfce4kbd-private/xfce-shortcuts.c b/libxfce4kbd-private/xfce-shortcuts.c
+index 79adac8..0859e1c 100644
+--- a/libxfce4kbd-private/xfce-shortcuts.c
++++ b/libxfce4kbd-private/xfce-shortcuts.c
+@@ -30,7 +30,6 @@
+ 
+ #include <libxfce4util/libxfce4util.h>
+ #include <libxfce4ui/libxfce4ui.h>
+-#include <xfconf/xfconf.h>
+ 
+ #include <libxfce4kbd-private/xfce-shortcuts.h>
+ #include <libxfce4kbd-private/xfce-shortcuts-xfwm4.h>
+diff --git a/libxfce4kbd-private/xfce-shortcuts.h b/libxfce4kbd-private/xfce-shortcuts.h
+index 421c79a..84fb2de 100644
+--- a/libxfce4kbd-private/xfce-shortcuts.h
++++ b/libxfce4kbd-private/xfce-shortcuts.h
+@@ -22,7 +22,6 @@
+ #define __XFCE_SHORTCUTS_H__
+ 
+ #include <X11/Xlib.h>
+-#include <xfconf/xfconf.h>
+ 
+ G_BEGIN_DECLS
+ 
+-- 
+2.35.1
+
