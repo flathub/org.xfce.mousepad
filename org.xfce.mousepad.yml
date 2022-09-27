@@ -64,8 +64,8 @@ modules:
       - --disable-vala
     sources:
       - type: archive
-        url: https://download.gnome.org/sources/gspell/1.10/gspell-1.10.0.tar.xz
-        sha256: 803bb884c0215d3fd22a85d7f30423aff88d9792f05a5199d8a489a2ffaae1da
+        url: https://download.gnome.org/sources/gspell/1.12/gspell-1.12.0.tar.xz
+        sha256: 40d2850f1bb6e8775246fa1e39438b36caafbdbada1d28a19fa1ca07e1ff82ad
         x-checker-data:
           type: gnome
           name: gspell
