@@ -79,8 +79,8 @@ modules:
           - --disable-debug
         sources:
           - type: archive
-            url: https://archive.xfce.org/src/xfce/libxfce4util/4.17/libxfce4util-4.17.3.tar.bz2
-            sha256: 27cbe4051f6443a124a967700953cd3580c14645596dc28a82cd4e5fae388fc2
+            url: https://archive.xfce.org/src/xfce/libxfce4util/4.17/libxfce4util-4.17.4.tar.bz2
+            sha256: bc75cb211994a816c7673618fdbff37ead7a643181ea6adb138fe004ae9d02b4
             x-checker-data:
               type: anitya
               project-id: 232001
@@ -129,8 +129,8 @@ modules:
       - --disable-debug
     sources:
       - type: archive
-        url: https://archive.xfce.org/src/xfce/libxfce4ui/4.17/libxfce4ui-4.17.8.tar.bz2
-        sha256: a96dabc333a89f4bc2faa4a02fd40c8e8070fd17d65e03c0ec77c7d2cc1284b0
+        url: https://archive.xfce.org/src/xfce/libxfce4ui/4.17/libxfce4ui-4.17.9.tar.bz2
+        sha256: d78c1852443a930bf1cdc5a90a68ffbf302fa3c34ed0885da41c7ee2f1c57b65
         x-checker-data:
           type: anitya
           project-id: 232000
