@@ -88,38 +88,20 @@ modules:
               stable-only: false
               url-template: https://archive.xfce.org/src/xfce/libxfce4util/$major.$minor/libxfce4util-$version.tar.bz2
       - name: xfconf
-        modules:
-          - name: xfce4-dev-tools
-            cleanup:
-              - '*'
-            sources:
-              - type: archive
-                url: https://archive.xfce.org/src/xfce/xfce4-dev-tools/4.16/xfce4-dev-tools-4.16.0.tar.bz2
-                sha256: f50b3070e66f3ebdf331744dd1ec5e1af5de333965d491e15ce05545e8eb4f04
-                x-checker-data:
-                  type: anitya
-                  project-id: 15888
-                  url-template: https://archive.xfce.org/src/xfce/xfce4-dev-tools/$major.$minor/xfce4-dev-tools-$version.tar.bz2
         cleanup:
           - /bin
           - /share/bash-completion
         config-opts:
-          - --enable-maintainer-mode
           - --disable-debug
           - XFCONF_SERVICE_NAME_PREFIX=org.xfce.mousepad
         sources:
-          - type: git
-            url: https://gitlab.xfce.org/xfce/xfconf.git
-            tag: xfconf-4.18.0
-            commit: fcbc9b83b8cdc0fba92e8b51ef6e08b43ef89cc6
+          - type: archive
+            url: https://archive.xfce.org/src/xfce/xfconf/4.18/xfconf-4.18.0.tar.bz2
+            sha256: 2e8c50160bf800a807aea094fc9dad81f9f361f42db56607508ed5b4855d2906
             x-checker-data:
               type: anitya
               project-id: 14854
-              tag-template: xfconf-$version
-          - type: patch
-            path: patches/Xfconf-Allow-to-choose-an-alternative-service-name-prefix.patch
-          - type: patch
-            path: patches/Add-a-lifecycle-manager-to-xfconfd.patch
+              url-template: https://archive.xfce.org/src/xfce/xfconf/$major.$minor/xfconf-$version.tar.bz2
     cleanup:
       - /bin
       - /etc
