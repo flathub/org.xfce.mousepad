@@ -24,9 +24,6 @@ cleanup:
   - /share/man
 
 modules:
-  # build-time dependencies
-  - shared-modules/intltool/intltool-0.51.json
-
   # mandatory dependencies
   - name: gtksourceview
     cleanup:
@@ -72,6 +69,9 @@ modules:
 
   - name: libxfce4ui
     modules:
+      # to be removed when libxfce4ui goes to 4.20
+      - shared-modules/intltool/intltool-0.51.json
+
       - name: libxfce4util
         cleanup:
           - /sbin
