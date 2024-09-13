@@ -57,8 +57,9 @@ modules:
               url-template: https://github.com/AbiWord/enchant/releases/download/v$version/enchant-$version.tar.gz
     cleanup:
       - /bin
+    buildsystem: meson
     config-opts:
-      - --disable-vala
+      - -Dvapi=false
     sources:
       - type: archive
         url: https://download.gnome.org/sources/gspell/1.14/gspell-1.14.0.tar.xz
