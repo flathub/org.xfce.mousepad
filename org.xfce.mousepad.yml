@@ -70,9 +70,6 @@ modules:
 
   - name: libxfce4ui
     modules:
-      # to be removed when libxfce4ui goes to 4.20
-      - shared-modules/intltool/intltool-0.51.json
-
       - name: libxfce4util
         cleanup:
           - /sbin
