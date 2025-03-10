@@ -39,7 +39,7 @@ modules:
           type: gnome
           name: gtksourceview
           versions:
-            <: 5.0.0
+            <: 4.99.0
 
   # optionnal dependencies (plugins)
   - name: gspell
