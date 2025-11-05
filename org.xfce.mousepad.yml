@@ -39,7 +39,8 @@ modules:
           type: gnome
           name: gtksourceview
           versions:
-            <: 4.99.0
+            <: 5.0.0
+          version-scheme: odd-minor-is-unstable
 
   # optional dependencies (plugins)
   - name: gspell
