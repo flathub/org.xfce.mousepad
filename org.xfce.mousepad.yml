@@ -19,6 +19,7 @@ cleanup:
   - /lib/girepository-1.0
   - /lib/pkgconfig
   - /include
+  - /share/doc
   - /share/gir-1.0
   - /share/gtk-doc
   - /share/man
@@ -61,6 +62,9 @@ modules:
     buildsystem: meson
     config-opts:
       - -Dvapi=false
+      - -Dgtk_doc=false
+      - -Dtests=false
+      - -Dinstall_tests=false
     sources:
       - type: archive
         url: https://download.gnome.org/sources/gspell/1.14/gspell-1.14.2.tar.xz
